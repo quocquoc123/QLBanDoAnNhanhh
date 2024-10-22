@@ -8120,19 +8120,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CTrang-DoAn\\QLBanDoAnNhanh\\QLBanDoAnNhanh\\QLBanDoAnNhanh.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Downloads\\QLBanDoAnNhanh\\QLBanDoAnNhanh\\QLBanDoAnNhanh\\QLBanDoAnNhanh.csproj",
       "projectName": "QLBanDoAnNhanh",
-      "projectPath": "D:\\CTrang-DoAn\\QLBanDoAnNhanh\\QLBanDoAnNhanh\\QLBanDoAnNhanh.csproj",
-      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "D:\\CTrang-DoAn\\QLBanDoAnNhanh\\QLBanDoAnNhanh\\obj\\",
+      "projectPath": "C:\\Users\\PC\\Downloads\\QLBanDoAnNhanh\\QLBanDoAnNhanh\\QLBanDoAnNhanh\\QLBanDoAnNhanh.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC\\Downloads\\QLBanDoAnNhanh\\QLBanDoAnNhanh\\QLBanDoAnNhanh\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

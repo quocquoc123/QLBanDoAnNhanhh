@@ -17,187 +17,195 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = QLBanDoAnNhanh
 build_property.RootNamespace = QLBanDoAnNhanh
-build_property.ProjectDir = D:\CTrang-DoAn\QLBanDoAnNhanh\QLBanDoAnNhanh\
+build_property.ProjectDir = C:\Users\PC\Downloads\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\CTrang-DoAn\QLBanDoAnNhanh\QLBanDoAnNhanh
+build_property.MSBuildProjectDirectory = C:\Users\PC\Downloads\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DanhMucs/Create.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DanhMucs/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFuaE11Y3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DanhMucs/Delete.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DanhMucs/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFuaE11Y3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DanhMucs/Details.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DanhMucs/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFuaE11Y3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DanhMucs/Edit.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DanhMucs/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFuaE11Y3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DanhMucs/Index.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DanhMucs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFuaE11Y3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DonHangs/Create.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DonHangs/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uSGFuZ3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DonHangs/Delete.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DonHangs/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uSGFuZ3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DonHangs/Details.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DonHangs/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uSGFuZ3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DonHangs/Edit.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DonHangs/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uSGFuZ3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DonHangs/Index.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/DonHangs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uSGFuZ3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/GioHangs/Checkout.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/GioHangs/Checkout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lvSGFuZ3NcQ2hlY2tvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/GioHangs/Index.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/GioHangs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lvSGFuZ3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Home/Index.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Home/Privacy.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/KhuyenMais/Create.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/KhuyenMais/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2h1eWVuTWFpc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/KhuyenMais/Delete.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/KhuyenMais/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2h1eWVuTWFpc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/KhuyenMais/Details.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/KhuyenMais/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2h1eWVuTWFpc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/KhuyenMais/Edit.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/KhuyenMais/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2h1eWVuTWFpc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/KhuyenMais/Index.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/KhuyenMais/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2h1eWVuTWFpc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/LoginUser/LoginAccount.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/LoginUser/LoginAccount.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5Vc2VyXExvZ2luQWNjb3VudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/LoginUser/RegisterUser.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/LoginUser/RegisterUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5Vc2VyXFJlZ2lzdGVyVXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/NguoiDungs/Create.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/NguoiDungs/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmd1b2lEdW5nc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/NguoiDungs/Delete.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/NguoiDungs/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmd1b2lEdW5nc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/NguoiDungs/Details.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/NguoiDungs/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmd1b2lEdW5nc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/NguoiDungs/Edit.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/NguoiDungs/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmd1b2lEdW5nc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/NguoiDungs/Index.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/NguoiDungs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmd1b2lEdW5nc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/ChiTietSanPham.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/ChiTietSanPham.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FuUGhhbXNcQ2hpVGlldFNhblBoYW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/Create.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FuUGhhbXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/Delete.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FuUGhhbXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/Details.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FuUGhhbXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/Edit.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FuUGhhbXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/Index.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FuUGhhbXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/TrangChu.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/SanPhams/TrangChu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FuUGhhbXNcVHJhbmdDaHUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Shared/Error.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Shared/_LayouAdmin.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Shared/_LayouAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdUFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/ThanhToans/Create.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/ThanhToans/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhhbmhUb2Fuc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/ThanhToans/Delete.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/ThanhToans/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhhbmhUb2Fuc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/ThanhToans/Details.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/ThanhToans/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhhbmhUb2Fuc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/ThanhToans/Edit.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/ThanhToans/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhhbmhUb2Fuc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/ThanhToans/Index.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/ThanhToans/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhhbmhUb2Fuc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/_ViewImports.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/User/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/User/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/_ViewStart.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/CTrang-DoAn/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Shared/_Layout.cshtml]
+[C:/Users/PC/Downloads/QLBanDoAnNhanh/QLBanDoAnNhanh/QLBanDoAnNhanh/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-wn9gapjtwz
