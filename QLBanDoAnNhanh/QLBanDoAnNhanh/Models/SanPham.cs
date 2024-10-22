@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace QLBanDoAnNhanh.Models;
@@ -26,7 +26,6 @@ public partial class SanPham
     public string? HinhAnh1 { get; set; }
 
     public string? HinhAnh2 { get; set; }
-
 
     public virtual ICollection<BinhLuan> BinhLuans { get; set; } = new List<BinhLuan>();
 

@@ -20,8 +20,8 @@
     <p><strong>Thành Phần:</strong> @Model.ThanhPhan</p>
     <p><strong>Số Lượng Bán Trong Ngày:</strong> @Model.SlbanTrongNgay</p>
     <p><strong>Chi Tiết Sản Phẩm:</strong> @Model.ChitietSp</p>
-    
-    <form method="post" action="@Url.Action("MuaHang", "SanPhams")">
+
+        <form method="post" action="@Url.Action("AddToCart", "GioHangs")">
         <input type="hidden" name="MaSp" value="@Model.MaSp" />
         <label for="quantity">Số Lượng:</label>
         <input type="number" id="quantity" name="quantity" min="1" value="1" style="width: 100px;" />

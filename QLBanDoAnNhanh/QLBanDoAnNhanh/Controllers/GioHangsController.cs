@@ -11,153 +11,152 @@ namespace QLBanDoAnNhanh.Controllers
 {
     public class GioHangsController : Controller
     {
-        private readonly QlbanDoAnNhanhContext _context;
-
-        public GioHangsController(QlbanDoAnNhanhContext context)
+        private GioHang GetGioHangFromSession()
         {
-            _context = context;
-        }
-
-        // GET: GioHangs
-        public async Task<IActionResult> Index()
-        {
-            var qlbanDoAnNhanhContext = _context.GioHangs.Include(g => g.MaNguoiDungNavigation);
-            return View(await qlbanDoAnNhanhContext.ToListAsync());
-        }
-
-        // GET: GioHangs/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var gioHang = await _context.GioHangs
-                .Include(g => g.MaNguoiDungNavigation)
-                .FirstOrDefaultAsync(m => m.MaGh == id);
+            var gioHang = HttpContext.Session.GetObjectFromJson<GioHang>("GioHang");
             if (gioHang == null)
             {
-                return NotFound();
+                gioHang = new GioHang();
             }
-
-            return View(gioHang);
+            return gioHang;
         }
-
-        // GET: GioHangs/Create
-        public IActionResult Create()
+        // Tính tổng số sản phẩm trong giỏ hàng và cập nhật ViewBag
+        private void UpdateCartItemCount(GioHang gioHang)
         {
-            ViewData["MaNguoiDung"] = new SelectList(_context.NguoiDungs, "MaNguoiDung", "MaNguoiDung");
-            return View();
+            ViewBag.CartItemCount = gioHang.ChiTietGioHangs.Sum(ct => ct.SoLuongSp);
         }
 
-        // POST: GioHangs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Lưu giỏ hàng vào session
+        private void SaveGioHangToSession(GioHang gioHang)
+        {
+            HttpContext.Session.SetObjectAsJson("GioHang", gioHang);
+        }
+        //private void UpdateCartItemCount(GioHang gioHang)
+        //{
+        //    ViewBag.CartItemCount = gioHang.ChiTietGioHangs.Sum(ct => ct.SoLuongSp);
+        //}
+        // Phương thức thêm sản phẩm vào giỏ hàng
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaGh,MaNguoiDung,SoLuong")] GioHang gioHang)
+        public IActionResult AddToCart(int MaSp, int quantity)
         {
-            if (ModelState.IsValid)
+            var gioHang = GetGioHangFromSession(); // Lấy giỏ hàng hiện tại từ session
+
+            // Tìm sản phẩm theo mã sản phẩm
+            using (var context = new QlbanDoAnNhanhContext())
             {
-                _context.Add(gioHang);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var sanPham = context.SanPhams.FirstOrDefault(sp => sp.MaSp == MaSp);
+                if (sanPham == null)
+                {
+                    return NotFound(); // Nếu không tìm thấy sản phẩm, trả về lỗi 404
+                }
+
+                // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
+                var chiTietGioHang = gioHang.ChiTietGioHangs.FirstOrDefault(ct => ct.MaSp == MaSp);
+                if (chiTietGioHang == null)
+                {
+                    // Nếu sản phẩm chưa có trong giỏ, thêm sản phẩm mới vào giỏ
+                    chiTietGioHang = new ChiTietGioHang
+                    {
+                        MaSp = MaSp,
+                        MaSpNavigation = sanPham,
+                        SoLuongSp = quantity,
+                        TongTien = (int)(quantity * sanPham.GiaTien)
+                    };
+                    gioHang.ChiTietGioHangs.Add(chiTietGioHang);
+                }
+                else
+                {
+                    // Nếu sản phẩm đã có trong giỏ, cập nhật số lượng và tổng tiền
+                    chiTietGioHang.SoLuongSp += quantity;
+                    chiTietGioHang.TongTien = (int)(chiTietGioHang.SoLuongSp * sanPham.GiaTien);
+                }
+
+                // Lưu lại giỏ hàng vào session
+                SaveGioHangToSession(gioHang);
+                UpdateCartItemCount(gioHang);
             }
-            ViewData["MaNguoiDung"] = new SelectList(_context.NguoiDungs, "MaNguoiDung", "MaNguoiDung", gioHang.MaNguoiDung);
-            return View(gioHang);
+
+            // Điều hướng về trang giỏ hàng
+            return RedirectToAction("Index");
         }
 
-        // GET: GioHangs/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // Hiển thị giỏ hàng
+        public IActionResult Index()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var gioHang = await _context.GioHangs.FindAsync(id);
-            if (gioHang == null)
-            {
-                return NotFound();
-            }
-            ViewData["MaNguoiDung"] = new SelectList(_context.NguoiDungs, "MaNguoiDung", "MaNguoiDung", gioHang.MaNguoiDung);
-            return View(gioHang);
+            var gioHang = GetGioHangFromSession();
+            UpdateCartItemCount(gioHang);
+            return View(gioHang); // Trả về View để hiển thị giỏ hàng
         }
 
-        // POST: GioHangs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Xóa sản phẩm khỏi giỏ hàng
+        public IActionResult RemoveFromCart(int MaSp)
+        {
+            var gioHang = GetGioHangFromSession(); // Lấy giỏ hàng từ session
+
+            // Tìm sản phẩm trong giỏ hàng
+            var chiTietGioHang = gioHang.ChiTietGioHangs.FirstOrDefault(ct => ct.MaSp == MaSp);
+            if (chiTietGioHang != null)
+            {
+                gioHang.ChiTietGioHangs.Remove(chiTietGioHang); // Xóa sản phẩm khỏi giỏ hàng
+            }
+
+            // Cập nhật lại session
+            SaveGioHangToSession(gioHang);
+            UpdateCartItemCount(gioHang);
+
+            // Điều hướng về trang giỏ hàng
+            return RedirectToAction("Index");
+        }
+
+        // Cập nhật số lượng sản phẩm trong giỏ hàng
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaGh,MaNguoiDung,SoLuong")] GioHang gioHang)
+        public IActionResult UpdateCart(int MaSp, int quantity)
         {
-            if (id != gioHang.MaGh)
+            var gioHang = GetGioHangFromSession(); // Lấy giỏ hàng từ session
+
+            // Tìm sản phẩm trong giỏ hàng
+            var chiTietGioHang = gioHang.ChiTietGioHangs.FirstOrDefault(ct => ct.MaSp == MaSp);
+            if (chiTietGioHang != null)
             {
-                return NotFound();
+                chiTietGioHang.SoLuongSp = quantity;
+                chiTietGioHang.TongTien = (int)(quantity * chiTietGioHang.MaSpNavigation.GiaTien);
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(gioHang);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!GioHangExists(gioHang.MaGh))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["MaNguoiDung"] = new SelectList(_context.NguoiDungs, "MaNguoiDung", "MaNguoiDung", gioHang.MaNguoiDung);
-            return View(gioHang);
+            // Cập nhật lại session
+            SaveGioHangToSession(gioHang);
+            UpdateCartItemCount(gioHang);
+
+            // Điều hướng về trang giỏ hàng
+            return RedirectToAction("Index");
         }
 
-        // GET: GioHangs/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // Xóa toàn bộ giỏ hàng
+        public IActionResult ClearCart()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var gioHang = new GioHang(); // Tạo mới giỏ hàng rỗng
+            SaveGioHangToSession(gioHang); // Lưu lại giỏ hàng trống vào session
 
-            var gioHang = await _context.GioHangs
-                .Include(g => g.MaNguoiDungNavigation)
-                .FirstOrDefaultAsync(m => m.MaGh == id);
-            if (gioHang == null)
-            {
-                return NotFound();
-            }
-
-            return View(gioHang);
+            // Điều hướng về trang giỏ hàng
+            return RedirectToAction("Index");
         }
-
-        // POST: GioHangs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult Checkout()
         {
-            var gioHang = await _context.GioHangs.FindAsync(id);
-            if (gioHang != null)
+            var gioHang = GetGioHangFromSession(); // Lấy giỏ hàng từ session
+
+            if (gioHang.ChiTietGioHangs.Count == 0)
             {
-                _context.GioHangs.Remove(gioHang);
+                TempData["Message"] = "Giỏ hàng của bạn đang trống!";
+                return RedirectToAction("Index");
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            // Ở đây, bạn có thể thêm logic lưu thông tin đơn hàng vào cơ sở dữ liệu
+            // hoặc thực hiện thanh toán thông qua các cổng thanh toán trực tuyến.
 
-        private bool GioHangExists(int id)
-        {
-            return _context.GioHangs.Any(e => e.MaGh == id);
+            // Xóa giỏ hàng sau khi thanh toán
+            ClearCart();
+
+            TempData["Message"] = "Thanh toán thành công! Cảm ơn bạn đã mua hàng.";
+            return RedirectToAction("Index");
         }
     }
 }
