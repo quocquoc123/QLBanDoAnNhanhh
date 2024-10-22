@@ -1,0 +1,84 @@
+﻿@model QLBanDoAnNhanh.Models.SanPham
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SanPham</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <!-- Bổ sung enctype="multipart/form-data" để form cho phép tải tệp -->
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="TenSp" class="control-label"></label>
+                <input asp-for="TenSp" class="form-control" />
+                <span asp-validation-for="TenSp" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MaGiamGia" class="control-label"></label>
+                <select asp-for="MaGiamGia" class="form-control" asp-items="ViewBag.MaGiamGia"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ThanhPhan" class="control-label"></label>
+                <input asp-for="ThanhPhan" class="form-control" />
+                <span asp-validation-for="ThanhPhan" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GiaTien" class="control-label"></label>
+                <input asp-for="GiaTien" class="form-control" />
+                <span asp-validation-for="GiaTien" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DonVi" class="control-label"></label>
+                <input asp-for="DonVi" class="form-control" />
+                <span asp-validation-for="DonVi" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ChitietSp" class="control-label"></label>
+                <input asp-for="ChitietSp" class="form-control" />
+                <span asp-validation-for="ChitietSp" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MaDm" class="control-label"></label>
+                <select asp-for="MaDm" class="form-control" asp-items="ViewBag.MaDm"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SlbanTrongNgay" class="control-label"></label>
+                <input asp-for="SlbanTrongNgay" class="form-control" />
+                <span asp-validation-for="SlbanTrongNgay" class="text-danger"></span>
+            </div>
+
+            <!-- Trường upload file cho HinhAnh1 -->
+            <div class="form-group">
+                <label>Hình Ảnh 1</label>
+                <input type="file" name="HinhAnh1" class="form-control" />
+            </div>
+
+            <!-- Trường upload file cho HinhAnh2 -->
+            <div class="form-group">
+                <label>Hình Ảnh 2</label>
+                <input type="file" name="HinhAnh2" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

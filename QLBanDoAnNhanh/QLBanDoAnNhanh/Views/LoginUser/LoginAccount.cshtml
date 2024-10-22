@@ -1,0 +1,29 @@
+﻿@model IEnumerable<QLBanDoAnNhanh.Models.NguoiDung>
+@{
+    ViewData["Title"] = "LoginAccount";
+}
+
+<h1>LoginAccount</h1>
+
+<h2>Login</h2>
+
+@if (ViewBag.ErrorInfo != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorInfo
+    </div>
+}
+
+<form asp-action="LoginAccount" method="post">
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" required />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Mật Khẩu:</label>
+        <input type="password" class="form-control" id="password" name="matkhau" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>

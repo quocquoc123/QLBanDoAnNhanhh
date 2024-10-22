@@ -1,0 +1,415 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Scripts/Css/TrangChuStyle.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: white;
+            padding: 10px 0;
+            border-bottom: 1px solid #e7e7e7;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 0 20px;
+        }
+
+        .contact, .account-lang {
+            display: flex;
+            align-items: center;
+            float: right;
+        }
+
+            .contact p, .account-lang a {
+                text-decoration: none;
+                color: #333;
+            }
+
+        .logo-search {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px;
+        }
+
+        .search-cart {
+            display: flex;
+            align-items: center;
+        }
+
+            .search-cart input {
+                padding: 5px;
+                margin-right: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            .search-cart .cart {
+                text-decoration: none;
+                color: #333;
+            }
+
+        nav {
+            background-color: #f2b633;
+            padding: 10px 0;
+        }
+
+            nav ul {
+                list-style: none;
+                display: flex;
+                justify-content: center;
+                margin: 0;
+                padding: 0;
+            }
+
+                nav ul li {
+                    margin: 0 15px;
+                }
+
+                    nav ul li a {
+                        text-decoration: none;
+                        color: white;
+                        font-weight: bold;
+                    }
+
+                    nav ul li a:hover {
+                        text-decoration: none;
+                        color: black;
+                        font-weight: bold;
+                    }
+
+        .featured-images {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+            .featured-images img {
+                width: 100%;
+                margin-right: 10px;
+            }
+
+        .side-images {
+            float: right;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .side-images img {
+                width: 300px;
+                margin-bottom: 10px;
+            }
+
+        .brands, .new-products, .featured-products {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .brands {
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .brands .brand {
+                flex: 1;
+                padding: 0 10px;
+            }
+
+                .brands .brand img {
+                    width: 350px;
+                }
+
+        .product-list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            width: 23%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+            .product img {
+                width: 100%;
+            }
+
+       /* Footer Styles */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+}
+
+.footer h5 {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.footer ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer ul li {
+    margin-bottom: 10px;
+}
+
+.footer ul li a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.footer ul li a:hover {
+    color: #fff;
+}
+
+.footer .store-logo {
+    width: 40px;
+    margin-right: 10px;
+    border-radius:8px;
+    transform: translateY(-20px);
+}
+
+.footer p {
+    margin: 0;
+    color: #ddd;
+}
+
+.social-icons a {
+    font-size: 20px;
+    color: #ddd;
+    margin: 0 10px;
+}
+
+
+.social-icons a:hover {
+    color: #fff;
+}
+
+.footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-bottom {
+    border-top: 1px solid #444;
+    padding-top: 20px;
+    text-align: center;
+    color: #ddd;
+}
+
+
+
+       
+        .search-form {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px; 
+        }
+
+        
+        .search-input {
+            width: 200px;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+           
+            .search-input:focus {
+                border-color: #f2b633;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                outline: none;
+            }
+
+        
+        .search-button {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            background-color: #f2b633;
+            border: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .search-button:hover {
+                background-color: #c28500;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            
+            .search-button i {
+                margin-right: 5px;
+            }
+
+        .social-icons a {
+            font-size: 20px; /* Kích thước của các biểu tượng */
+            color: #ddd; /* Màu sắc ban đầu */
+            margin: 0 10px; /* Khoảng cách giữa các biểu tượng */
+        }
+
+            .social-icons a:hover {
+                color: #fff; /* Đổi màu khi hover */
+            }
+
+
+
+    </style>
+</head>
+<body>
+
+    <header style="width:1400px;margin:auto">
+        <div class="top-bar" style="display:flex;">
+            <div style="float:left">
+                <span class="contact" style="font-weight: bold">Zalo 0123244566</span>
+            </div>
+            <div class="account-lang" style="float:left">
+
+                <a style="padding-left:15px">
+
+                   @*  @if (Session["Email"] == null)
+                    { *@
+                       @*  @Html.ActionLink("Tài Khoản", "Index", "LoginUser") *@
+                    @* } *@
+                   @*  else
+                    {
+                        <a href="@Url.Action("UserDetails", "LoginUser")"><text>Hello</text> @Session["Email"]</a>
+                        <span style="padding-left:15px">@Html.ActionLink("Đăng Xuất", "LogOutUser", "LoginUser")</span>
+                    } *@
+                </a>
+
+                <div>
+                    <a href="@Url.Action("ShowCart", "ShoppingCart")"><img src="@Url.Content("~/images/cart.jpg")" id="cart" height="30" width="30" /></a>
+                    @* @Html.Action("BagCart", "ShoppingCart") *@
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="logo-search">
+            <a href="@Url.Action("TrangChu", "SanPhams")">
+                <img src="~/images/logo.jpg" alt="Foot Store Logo" class="logo">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="@Url.Action("TrangChu", "SanPhams")">Trang chủ</a></li>
+                    <li><a href="@Url.Action("SanPhamTheoTenDanhMuc", "SanPhams", new { TenHang = "THUCDON" }, null)">Thực đơn</a></li>
+                    <li><a href="@Url.Action("SanPhamTheoTenDanhMuc", "SanPhams", new { TenHang = "NUOCUONG" }, null)">Nước uống</a></li>
+                    <li><a href="@Url.Action("SanPhamTheoTenDanhMuc", "SanPhams", new { TenHang = "BESTSELLER" }, null)">Best seller</a></li>
+                    <li><a href="@Url.Action("SanPhamTheoTenDanhMuc", "SanPhams", new { TenHang = "KHUYENMAI" }, null)">Khuyến mãi</a></li>
+                    <li><a href="@Url.Action("SanPhamTheoTenDanhMuc", "SanPhams", new { TenHang = "DOANCAY" }, null)">Đồ ăn cay</a></li>
+                 
+                </ul>
+            </nav>
+            <div class="col-6 text-right">
+                <form method="GET" action="@Url.Action("Search", "SanPhams")" class="form-inline d-inline-block">
+                    <input type="text" class="form-control" id="searchTerm" name="searchTerm" placeholder="Tìm kiếm sản phẩm">
+                    <button class="btn btn-primary" id="searchButton" type="submit">
+                        <i class="fas fa-search"></i> Tìm kiếm
+                    </button>
+                </form>
+            </div>
+        </div>
+        <hr />
+
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- Danh Mục Món Ăn -->
+                <div class="col-md-3">
+                    <h5>Danh Mục Món Ăn</h5>
+                    <ul>
+                        <li><a href="#">Ưu Đãi</a></li>
+                        <li><a href="#">Món Mới</a></li>
+                        <li><a href="#">Combo 1 Người</a></li>
+                        <li><a href="#">Combo Nhóm</a></li>
+                        <li><a href="#">Gà Rán - Gà Quay</a></li>
+                        <li><a href="#">Burger - Cơm - Mì Ý</a></li>
+                        <li><a href="#">Thức Ăn Nhẹ</a></li>
+                        <li><a href="#">Thức Uống & Tráng Miệng</a></li>
+                    </ul>
+                </div>
+
+                <!-- Về Chúng Tôi -->
+                <div class="col-md-3">
+                    <h5>Về Chúng Tôi</h5>
+                    <ul>
+                        <li><a href="#">Câu Chuyện Của Chúng Tôi</a></li>
+                        <li><a href="#">Tin Khuyến Mãi</a></li>
+                        <li><a href="#">Tin tức</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                        <li><a href="#">Đặt tiệc Sinh nhật</a></li>
+                    </ul>
+                </div>
+
+                <!-- Liên hệ -->
+                <div class="col-md-3">
+                    <h5>Liên Hệ</h5>
+                    <ul>
+                        <li><a href="#">Theo dõi đơn hàng</a></li>
+                        <li><a href="#">Hệ Thống Nhà Hàng</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Chính sách -->
+                <div class="col-md-3">
+                    <h5>Chính Sách</h5>
+                    <ul>
+                        <li><a href="#">Chính sách hoạt động</a></li>
+                        <li><a href="#">Chính sách và quy định</a></li>
+                        <li><a href="#">Chính sách bảo mật thông tin</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <p>&copy; 2023 Fast Food. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    
+                    <a href="#"><i class="fab fa-facebook-f"></i><img src="~/images/fb.png" alt="facebook" class="store-logo"></a>
+                    <a href="#"><i class="fab fa-instagram"></i><img src="~/images/ig.jpg" alt="instagram" class="store-logo"></a>
+                    <a href="#"><i class="fab fa-youtube"></i><img style="height:40px;" src="~/images/Youtube.png" alt="youtube" class="store-logo"></a>
+                    <a href="#"><i class="fab fa-twitter"></i><img src="~/images/tw.png" alt="twitter" class="store-logo"></a>
+                </div>
+            </div>
+
+     
+        </div>
+    </footer>
+
+
+
+</body>
+</html>
