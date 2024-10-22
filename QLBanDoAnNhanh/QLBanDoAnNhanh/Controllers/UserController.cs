@@ -201,58 +201,58 @@ namespace QLBanDoAnNhanh.Controllers
 
             return View();
         }
-        //public IActionResult Profile()
-        //{
-        //    if (HttpContext.Session.GetString("userLogin") == null)
-        //    {
-        //        return RedirectToAction("Login", "User");
-        //    }
+        public IActionResult Profile()
+        {
+            if (HttpContext.Session.GetString("userLogin") == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
 
-        //    string username = HttpContext.Session.GetString("userLogin");
-        //    var user = _context.NguoiDungs.FirstOrDefault(u => u.Username == username);
+            string username = HttpContext.Session.GetString("userLogin");
+            var user = _context.NguoiDungs.FirstOrDefault(u => u.Username == username);
 
-        //    if (user == null)
-        //    {
-        //        ViewBag.Error = "Không tìm thấy người dùng.";
-        //        return View();
-        //    }
+            if (user == null)
+            {
+                ViewBag.Error = "Không tìm thấy người dùng.";
+                return View();
+            }
 
-        //    return View(user);
-        //}
+            return View(user);
+        }
 
-        //// Phương thức POST: Cập nhật thông tin người dùng không có ràng buộc
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Profile(NguoiDung model)
-        //{
-        //    if (HttpContext.Session.GetString("userLogin") == null)
-        //    {
-        //        return RedirectToAction("Login", "User");
-        //    }
+        // Phương thức POST: Cập nhật thông tin người dùng không có ràng buộc
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Profile(NguoiDung model)
+        {
+            if (HttpContext.Session.GetString("userLogin") == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
 
-        //    string username = HttpContext.Session.GetString("userLogin");
-        //    var user = _context.NguoiDungs.FirstOrDefault(u => u.Username == username);
+            string username = HttpContext.Session.GetString("userLogin");
+            var user = _context.NguoiDungs.FirstOrDefault(u => u.Username == username);
 
-        //    if (user != null)
-        //    {
-        //        // Cập nhật thông tin người dùng
-        //        user.HoTen = model.HoTen;
-        //        user.Email = model.Email;
-        //        user.Sdt = model.Sdt;
+            if (user != null)
+            {
+                // Cập nhật thông tin người dùng
+                user.HoTen = model.HoTen;
+                user.Email = model.Email;
+                user.Sdt = model.Sdt;
 
-        //        // Lưu vào database
-        //        _context.Entry(user).State = EntityState.Modified;
-        //        _context.SaveChanges();
+                // Lưu vào database
+                _context.Entry(user).State = EntityState.Modified;
+                _context.SaveChanges();
 
-        //        ViewBag.Message = "Cập nhật thông tin thành công!";
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Error = "Không tìm thấy người dùng.";
-        //    }
+                ViewBag.Message = "Cập nhật thông tin thành công!";
+            }
+            else
+            {
+                ViewBag.Error = "Không tìm thấy người dùng.";
+            }
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
     }
 }
