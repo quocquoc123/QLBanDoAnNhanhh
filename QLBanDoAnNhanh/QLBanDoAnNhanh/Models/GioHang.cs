@@ -15,5 +15,5 @@
 
         public virtual NguoiDung? MaNguoiDungNavigation { get; set; }
         public int? MaKhuyenMai { get;  set; }
-    public decimal? TongTien { get; internal set; }
+        
 }

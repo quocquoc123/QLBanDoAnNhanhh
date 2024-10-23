@@ -60,7 +60,7 @@ namespace QLBanDoAnNhanh.Controllers
                         MaSp = MaSp,
                         MaSpNavigation = sanPham,
                         SoLuongSp = quantity,
-                        MaKhuyenMai = quantity,
+                        MaKhuyenMai = 1,
                         TongTien = (int)(quantity * sanPham.GiaTien)
                     };
                     gioHang.ChiTietGioHangs.Add(chiTietGioHang);
@@ -149,7 +149,7 @@ namespace QLBanDoAnNhanh.Controllers
                 TempData["Message"] = "Giỏ hàng của bạn đang trống!";
                 return RedirectToAction("Index");
             }
-
+            string maDonHang = Guid.NewGuid().ToString();
             using (var context = new QlbanDoAnNhanhContext())
             {
                 // Lấy thông tin người dùng đăng nhập
@@ -158,7 +158,7 @@ namespace QLBanDoAnNhanh.Controllers
                 // Tạo đối tượng DonHang
                 var donHang = new DonHang
                 {
-                    MaDh = Guid.NewGuid().ToString(),
+                    MaDh = maDonHang,
                     Username = username,
                     MaKhuyenMai = 1, // Lấy mã khuyến mãi từ giỏ hàng nếu có
                     Diachi = "Lê trọng tấn",  // Có thể thay đổi theo yêu cầu
@@ -177,7 +177,7 @@ namespace QLBanDoAnNhanh.Controllers
                 {
                     var chiTiet = new ChiTietDonHang
                     {
-                        MaDh = "3a0e203e-bde6-4e93-8ebb-f63b2c95cc2b",
+                        MaDh = maDonHang,
                         MaSp = (int)item.MaSp,
                         SoLuong = (int)item.SoLuongSp,
                         TongTien = (int)item.TongTien
@@ -194,7 +194,7 @@ namespace QLBanDoAnNhanh.Controllers
             ClearCart();
             TempData["Message"] = "Thanh toán thành công! Cảm ơn bạn đã mua hàng.";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("TrangChu","SanPhams");
         }
         // Phương thức lấy trạng thái đơn hàng từ database
         private string GetOrderStatusFromDatabase(QlbanDoAnNhanhContext context, string username)

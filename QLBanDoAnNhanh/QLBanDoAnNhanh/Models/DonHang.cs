@@ -5,7 +5,7 @@ namespace QLBanDoAnNhanh.Models;
 
 public partial class DonHang
 {
-    public string MaDh { get; set; } = Guid.NewGuid().ToString();
+    public string MaDh { get; set; } /*= Guid.NewGuid().ToString();*/
 
     public string Username { get; set; } = null!;
 
