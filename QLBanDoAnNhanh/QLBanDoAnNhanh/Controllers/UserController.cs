@@ -51,19 +51,16 @@ namespace QLBanDoAnNhanh.Controllers
                 HttpContext.Session.SetString("hoTen", check.HoTen);
                 HttpContext.Session.SetString("email", check.Email);
                 HttpContext.Session.SetString("sdt", check.Sdt);
+                HttpContext.Session.SetString("userLogin", check.Username);
 
-                if (check.RoleId == 1)
+                // Kiểm tra quyền Admin
+                if (check.RoleId == 2) // RoleId = 2 nghĩa là Admin
                 {
-                    HttpContext.Session.SetString("userLogin", check.Username);
-                }
-                else
-                {
-                    HttpContext.Session.SetString("userLogin", check.Username);
                     HttpContext.Session.SetString("adminLogin", check.Username);
-                    return RedirectToAction("sanpham", "Admin");
+                    return RedirectToAction("Index", "NguoiDungs"); // Chuyển hướng đến trang quản trị
                 }
 
-                return RedirectToAction("TrangChu", "SanPhams");
+                return RedirectToAction("TrangChu", "SanPhams"); // Người dùng thông thường
             }
 
             return View();

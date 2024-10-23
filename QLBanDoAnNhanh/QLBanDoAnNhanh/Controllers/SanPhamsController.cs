@@ -142,31 +142,64 @@ namespace QLBanDoAnNhanh.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaSp,TenSp,MaGiamGia,ThanhPhan,GiaTien,DonVi,ChitietSp,MaDm,SlbanTrongNgay,HinhAnh1,HinhAnh2")] SanPham sanPham)
+        public async Task<IActionResult> Edit(int id, [Bind("MaSp,TenSp,MaGiamGia,ThanhPhan,GiaTien,DonVi,ChitietSp,MaDm,SlbanTrongNgay,HinhAnh1,HinhAnh2")]
+        SanPham sanPham, IFormFile file1, IFormFile file2)
         {
             if (id != sanPham.MaSp)
             {
                 return NotFound();
             }
 
-
-            try
+            if (ModelState.IsValid)
             {
-                _context.Update(sanPham);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SanPhamExists(sanPham.MaSp))
+                try
                 {
-                    return NotFound();
+                    // Kiểm tra xem có tệp hình ảnh mới không
+                    if ((file1 != null && file1.Length > 0) && (file2 != null && file2.Length > 0))
+                    {
+                        // Tạo tên file duy nhất để tránh xung đột
+                        var fileName1 = Path.GetFileName(file1.FileName);
+                        var fileName2 = Path.GetFileName(file2.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName1);
+                        var filePath1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName2);
+
+                        // Xóa hình ảnh cũ (nếu cần)
+
+                        // Lưu file vào thư mục wwwroot/images
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file1.CopyToAsync(stream);
+
+                        }
+                        using (var stream = new FileStream(filePath1, FileMode.Create))
+                        {
+
+                            await file2.CopyToAsync(stream);
+                        }
+
+                        // Gán đường dẫn của ảnh mới cho thuộc tính AnhSp
+                        sanPham.HinhAnh1 = "/images/" + fileName1; // Đảm bảo đường dẫn hợp lệ
+                        sanPham.HinhAnh2 = "/images/" + fileName2; // Đảm bảo đường dẫn hợp lệ
+                    }
+
+                    // Cập nhật thông tin sản phẩm
+                    _context.Update(sanPham);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
-                }
+                    if (!SanPhamExists(sanPham.MaSp))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
 
 
+                }
             }
             ViewData["MaDm"] = new SelectList(_context.DanhMucs, "MaDm", "MaDm", sanPham.MaDm);
             ViewData["MaGiamGia"] = new SelectList(_context.GiamGia, "MaGiamGia", "MaGiamGia", sanPham.MaGiamGia);
@@ -235,6 +268,14 @@ namespace QLBanDoAnNhanh.Controllers
         {
             return _context.SanPhams.Any(e => e.MaSp == id);
         }
+        public IActionResult SanPhamTheoTenDanhMuc(string TenHang)
+        {
+            var sanPhams = _context.SanPhams
+                .Where(sp => sp.MaDmNavigation.TenDm == TenHang)
+                .ToList();
 
+            ViewBag.TenDanhMuc = TenHang; // Truyền tên danh mục cho View
+            return View(sanPhams);
+        }
     }
 }

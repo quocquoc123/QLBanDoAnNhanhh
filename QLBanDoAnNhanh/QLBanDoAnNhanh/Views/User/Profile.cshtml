@@ -1,47 +1,89 @@
 ﻿@model QLBanDoAnNhanh.Models.NguoiDung
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">@ViewData["Title"]</h2>
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white text-center">
-                    <h4 class="mb-0">Cập nhật thông tin cá nhân</h4>
-                </div>
-                <div class="card-body p-4">
-                    @using (Html.BeginForm("Profile", "User", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
+<style>
+    /* Styles specifically for the user information page */
+    .user-info-container {
+        max-width: 600px; /* Set a maximum width for the container */
+        margin: 20px auto; /* Center the container */
+        padding: 20px; /* Add padding inside the container */
+        background-color: #ffffff; /* White background color */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
 
-                        <div class="form-group mb-3">
-                            @Html.LabelFor(m => m.HoTen, new { @class = "form-label fw-bold" })
-                            @Html.TextBoxFor(m => m.HoTen, new { @class = "form-control rounded-pill px-3", placeholder = "Nhập họ tên" })
-                        </div>
+    .user-info-form {
+        display: flex; /* Use flexbox for layout */
+        flex-direction: column; /* Stack items vertically */
+    }
 
-                        <div class="form-group mb-3">
-                            @Html.LabelFor(m => m.Email, new { @class = "form-label fw-bold" })
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control rounded-pill px-3", placeholder = "Nhập email" })
-                        </div>
+        .user-info-form .form-group {
+            margin-bottom: 15px; /* Space between form groups */
+        }
 
-                        <div class="form-group mb-3">
-                            @Html.LabelFor(m => m.Sdt, new { @class = "form-label fw-bold" })
-                            @Html.TextBoxFor(m => m.Sdt, new { @class = "form-control rounded-pill px-3", placeholder = "Nhập số điện thoại" })
-                        </div>
+        .user-info-form .form-label {
+            font-weight: bold; /* Make the label bold */
+            margin-bottom: 5px; /* Space below the label */
+        }
 
-                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">Cập nhật</button>
+        .user-info-form .form-control {
+            border: 1px solid #ced4da; /* Border color */
+            border-radius: 4px; /* Rounded borders */
+            padding: 10px; /* Add padding inside the input */
+            font-size: 14px; /* Font size for inputs */
+        }
 
-                        @if (ViewBag.Message != null)
-                        {
-                            <div class="alert alert-success mt-3 text-center">@ViewBag.Message</div>
-                        }
+        .user-info-form .btn-primary {
+            background-color: #007bff; /* Primary button color */
+            border: none; /* Remove border */
+            color: white; /* White text color */
+            padding: 10px 15px; /* Padding for button */
+            border-radius: 4px; /* Rounded corners for button */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
 
-                        @if (ViewBag.Error != null)
-                        {
-                            <div class="alert alert-danger mt-3 text-center">@ViewBag.Error</div>
-                        }
-                    }
-                </div>
-            </div>
+            .user-info-form .btn-primary:hover {
+                background-color: #0056b3; /* Darker button color on hover */
+            }
+
+        .user-info-form .alert {
+            margin-top: 20px; /* Space above alerts */
+        }
+
+</style>
+<div class="user-info-container">
+    <h2 class="text-center">Quản lý thông tin cá nhân</h2>
+
+    @using (Html.BeginForm("Profile", "User", FormMethod.Post, new { @class = "user-info-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.HoTen, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.HoTen, new { @class = "form-control", placeholder = "Nhập họ tên" })
         </div>
-    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Nhập email" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Sdt, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Sdt, new { @class = "form-control", placeholder = "Nhập số điện thoại" })
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">Cập nhật</button>
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success mt-3 text-center">@ViewBag.Message</div>
+        }
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger mt-3 text-center">@ViewBag.Error</div>
+        }
+    }
 </div>
+
+

@@ -160,7 +160,7 @@ namespace QLBanDoAnNhanh.Controllers
                 {
                     MaDh = maDonHang,
                     Username = username,
-                    MaKhuyenMai = 1, // Lấy mã khuyến mãi từ giỏ hàng nếu có
+                    MaKhuyenMai = 2, // Lấy mã khuyến mãi từ giỏ hàng nếu có
                     Diachi = "Lê trọng tấn",  // Có thể thay đổi theo yêu cầu
                     TongTien = gioHang.ChiTietGioHangs.Sum(x => (double)(x.TongTien ?? 0)), // Tổng tiền từ giỏ hàng
                     SoLuong = (int)gioHang.ChiTietGioHangs.Sum(x => x.SoLuongSp),
