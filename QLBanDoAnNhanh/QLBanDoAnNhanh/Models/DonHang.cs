@@ -5,11 +5,11 @@ namespace QLBanDoAnNhanh.Models;
 
 public partial class DonHang
 {
-    public string MaDh { get; set; } = null!;
+    public string MaDh { get; set; } = Guid.NewGuid().ToString();
 
     public string Username { get; set; } = null!;
 
-    public string Diachi { get; set; } = null!;
+    public string Diachi { get; set; } 
 
     public int MaKhuyenMai { get; set; }
 
@@ -25,9 +25,10 @@ public partial class DonHang
 
     public int? MaNguoiDung { get; set; }
 
+
     public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; } = new List<ChiTietDonHang>();
 
-    public virtual KhuyenMai MaKhuyenMaiNavigation { get; set; } = null!;
+    public virtual KhuyenMai MaKhuyenMaiNavigation { get; set; } = null;
 
     public virtual NguoiDung? MaNguoiDungNavigation { get; set; }
 

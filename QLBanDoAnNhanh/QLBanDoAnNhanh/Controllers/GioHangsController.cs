@@ -60,6 +60,7 @@ namespace QLBanDoAnNhanh.Controllers
                         MaSp = MaSp,
                         MaSpNavigation = sanPham,
                         SoLuongSp = quantity,
+                        MaKhuyenMai = quantity,
                         TongTien = (int)(quantity * sanPham.GiaTien)
                     };
                     gioHang.ChiTietGioHangs.Add(chiTietGioHang);
@@ -139,24 +140,71 @@ namespace QLBanDoAnNhanh.Controllers
             // Điều hướng về trang giỏ hàng
             return RedirectToAction("Index");
         }
-        public IActionResult Checkout()
+        public IActionResult Checkout(string DiaChi)
         {
-            var gioHang = GetGioHangFromSession(); // Lấy giỏ hàng từ session
+            var gioHang = GetGioHangFromSession();
 
-            if (gioHang.ChiTietGioHangs.Count == 0)
+            if (!gioHang.ChiTietGioHangs.Any())
             {
                 TempData["Message"] = "Giỏ hàng của bạn đang trống!";
                 return RedirectToAction("Index");
             }
 
-            // Ở đây, bạn có thể thêm logic lưu thông tin đơn hàng vào cơ sở dữ liệu
-            // hoặc thực hiện thanh toán thông qua các cổng thanh toán trực tuyến.
+            using (var context = new QlbanDoAnNhanhContext())
+            {
+                // Lấy thông tin người dùng đăng nhập
+                var username = HttpContext.Session.GetString("userLogin") ?? "UnknownUser";
+                string trangThai = GetOrderStatusFromDatabase(context, username);
+                // Tạo đối tượng DonHang
+                var donHang = new DonHang
+                {
+                    MaDh = Guid.NewGuid().ToString(),
+                    Username = username,
+                    MaKhuyenMai = 1, // Lấy mã khuyến mãi từ giỏ hàng nếu có
+                    Diachi = "Lê trọng tấn",  // Có thể thay đổi theo yêu cầu
+                    TongTien = gioHang.ChiTietGioHangs.Sum(x => (double)(x.TongTien ?? 0)), // Tổng tiền từ giỏ hàng
+                    SoLuong = (int)gioHang.ChiTietGioHangs.Sum(x => x.SoLuongSp),
+                    TrangThai = trangThai,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
 
-            // Xóa giỏ hàng sau khi thanh toán
+                // Thêm đơn hàng vào cơ sở dữ liệu
+                context.DonHangs.Add(donHang);
+
+                // Lưu từng sản phẩm trong giỏ hàng vào chi tiết đơn hàng
+                foreach (var item in gioHang.ChiTietGioHangs)
+                {
+                    var chiTiet = new ChiTietDonHang
+                    {
+                        MaDh = "3a0e203e-bde6-4e93-8ebb-f63b2c95cc2b",
+                        MaSp = (int)item.MaSp,
+                        SoLuong = (int)item.SoLuongSp,
+                        TongTien = (int)item.TongTien
+                    };
+
+                    context.ChiTietDonHangs.Add(chiTiet);
+                }
+
+                // Lưu tất cả thay đổi
+                context.SaveChanges();
+            }
+
+            // Xóa giỏ hàng sau khi thanh toán thành công
             ClearCart();
-
             TempData["Message"] = "Thanh toán thành công! Cảm ơn bạn đã mua hàng.";
+
             return RedirectToAction("Index");
         }
+        // Phương thức lấy trạng thái đơn hàng từ database
+        private string GetOrderStatusFromDatabase(QlbanDoAnNhanhContext context, string username)
+        {
+            // Kiểm tra xem người dùng đã có đơn hàng trước đó chưa
+            var hasPreviousOrders = context.DonHangs.Any(d => d.Username == username);
+
+            // Nếu có đơn hàng trước đó thì đặt là "Đang xử lý", ngược lại là "Mới"
+            return hasPreviousOrders ? "Đang xử lý" : "Mới";
+        }
+
     }
 }

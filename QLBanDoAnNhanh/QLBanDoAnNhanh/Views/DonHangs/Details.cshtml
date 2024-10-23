@@ -4,70 +4,19 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_LayouAdmin.cshtml";
 }
+<h2>Chi Tiết Đơn Hàng</h2>
 
-<h1>Details</h1>
+<div class="card">
+    <div class="card-body">
+        <p><strong>Mã Đơn Hàng:</strong> @Model.MaDh</p>
+        <p><strong>Người Đặt:</strong> @Model.Username</p>
+        <p><strong>Địa Chỉ:</strong> @Model.Diachi</p>
+        <p><strong>Tổng Tiền:</strong> @Model.TongTien.ToString("N0") VND</p>
+        <p><strong>Số Lượng Sản Phẩm:</strong> @Model.SoLuong</p>
+        <p><strong>Trạng Thái:</strong> @Model.TrangThai</p>
+        <p><strong>Ngày Tạo:</strong> @Model.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
+        <p><strong>Ngày Cập Nhật:</strong> @Model.UpdatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
 
-<div>
-    <h4>DonHang</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Diachi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Diachi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TongTien)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TongTien)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoLuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TrangThai)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaKhuyenMaiNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaKhuyenMaiNavigation.MaKhuyenMai)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaNguoiDungNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaNguoiDungNavigation.MaNguoiDung)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.MaDh">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        <a class="btn btn-primary" asp-action="Index">Quay lại danh sách</a>
+    </div>
+</div>s

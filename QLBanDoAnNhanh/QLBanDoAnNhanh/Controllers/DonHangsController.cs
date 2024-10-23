@@ -24,8 +24,6 @@ namespace QLBanDoAnNhanh.Controllers
             var qlbanDoAnNhanhContext = _context.DonHangs.Include(d => d.MaKhuyenMaiNavigation).Include(d => d.MaNguoiDungNavigation);
             return View(await qlbanDoAnNhanhContext.ToListAsync());
         }
-
-        // GET: DonHangs/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -36,38 +34,15 @@ namespace QLBanDoAnNhanh.Controllers
             var donHang = await _context.DonHangs
                 .Include(d => d.MaKhuyenMaiNavigation)
                 .Include(d => d.MaNguoiDungNavigation)
+                .Include(d => d.ChiTietDonHangs)
+                    .ThenInclude(ct => ct.MaSpNavigation) // Nếu cần thông tin sản phẩm
                 .FirstOrDefaultAsync(m => m.MaDh == id);
+
             if (donHang == null)
             {
                 return NotFound();
             }
 
-            return View(donHang);
-        }
-
-        // GET: DonHangs/Create
-        public IActionResult Create()
-        {
-            ViewData["MaKhuyenMai"] = new SelectList(_context.KhuyenMais, "MaKhuyenMai", "MaKhuyenMai");
-            ViewData["MaNguoiDung"] = new SelectList(_context.NguoiDungs, "MaNguoiDung", "MaNguoiDung");
-            return View();
-        }
-
-        // POST: DonHangs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaDh,Username,Diachi,MaKhuyenMai,TongTien,SoLuong,TrangThai,CreatedAt,UpdatedAt,MaNguoiDung")] DonHang donHang)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(donHang);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["MaKhuyenMai"] = new SelectList(_context.KhuyenMais, "MaKhuyenMai", "MaKhuyenMai", donHang.MaKhuyenMai);
-            ViewData["MaNguoiDung"] = new SelectList(_context.NguoiDungs, "MaNguoiDung", "MaNguoiDung", donHang.MaNguoiDung);
             return View(donHang);
         }
 
@@ -84,17 +59,15 @@ namespace QLBanDoAnNhanh.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaKhuyenMai"] = new SelectList(_context.KhuyenMais, "MaKhuyenMai", "MaKhuyenMai", donHang.MaKhuyenMai);
-            ViewData["MaNguoiDung"] = new SelectList(_context.NguoiDungs, "MaNguoiDung", "MaNguoiDung", donHang.MaNguoiDung);
+
+            ViewData["MaKhuyenMai"] = new SelectList(_context.KhuyenMais, "MaKhuyenMai", "TenKhuyenMai", donHang.MaKhuyenMai);
             return View(donHang);
         }
 
         // POST: DonHangs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("MaDh,Username,Diachi,MaKhuyenMai,TongTien,SoLuong,TrangThai,CreatedAt,UpdatedAt,MaNguoiDung")] DonHang donHang)
+        public async Task<IActionResult> Edit(string id, [Bind("MaDh,Username,Diachi,MaKhuyenMai,TongTien,SoLuong,TrangThai,CreatedAt,UpdatedAt")] DonHang donHang)
         {
             if (id != donHang.MaDh)
             {
@@ -105,6 +78,7 @@ namespace QLBanDoAnNhanh.Controllers
             {
                 try
                 {
+                    donHang.UpdatedAt = DateTime.Now; // Cập nhật thời gian chỉnh sửa
                     _context.Update(donHang);
                     await _context.SaveChangesAsync();
                 }
@@ -121,12 +95,10 @@ namespace QLBanDoAnNhanh.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaKhuyenMai"] = new SelectList(_context.KhuyenMais, "MaKhuyenMai", "MaKhuyenMai", donHang.MaKhuyenMai);
-            ViewData["MaNguoiDung"] = new SelectList(_context.NguoiDungs, "MaNguoiDung", "MaNguoiDung", donHang.MaNguoiDung);
+
+            ViewData["MaKhuyenMai"] = new SelectList(_context.KhuyenMais, "MaKhuyenMai", "TenKhuyenMai", donHang.MaKhuyenMai);
             return View(donHang);
         }
-
-        // GET: DonHangs/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -145,7 +117,47 @@ namespace QLBanDoAnNhanh.Controllers
 
             return View(donHang);
         }
+        public async Task<IActionResult> UpdateTrangThai_ChuaGiao(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var donHang = await _context.DonHangs.FindAsync(id);
+            if (donHang == null)
+            {
+                return NotFound();
+            }
+
+            donHang.TrangThai = "Chưa Giao";
+            _context.Entry(donHang).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // Hàm cập nhật trạng thái "Đã Giao"
+        public async Task<IActionResult> UpdateTrangThai_DaGiao(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var donHang = await _context.DonHangs.FindAsync(id);
+            if (donHang == null)
+            {
+                return NotFound();
+            }
+
+            donHang.TrangThai = "Đã Giao";
+            donHang.UpdatedAt = DateTime.Now; // Cập nhật thời gian giao
+            _context.Entry(donHang).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
         // POST: DonHangs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

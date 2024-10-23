@@ -47,12 +47,20 @@
             <td colspan="4" style="text-align: left; font-weight: bold;">Tổng số lượng:</td>
             <td colspan="2">@Model.ChiTietGioHangs.Sum(x => x.SoLuongSp)</td>
         </tr>
+        @* <tr>
+            <td colspan="6">
+                <div class="form-group" style="margin-top: 20px;">
+                    <label for="diachi">Địa chỉ giao hàng:</label>
+                    <input type="text" id="diachi" name="DiaChi" class="form-control" required placeholder="Nhập địa chỉ giao hàng">
+                </div>
+            </td>
+        </tr> *@
     </tbody>
 </table>
 
 <div style="text-align:center; margin-top: 20px;margin-bottom:40px;">
     <a href="/SanPham/Index" class="btn btn-success">Tiếp tục mua sắm</a>
-    <a href="/GioHangs/Checkout" class="btn btn-primary">Thanh toán</a>
+    <a asp-controller="GioHangs" asp-action="Checkout" class="btn btn-primary">Thanh toán</a>
 </div>
 
 

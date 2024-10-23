@@ -226,6 +226,7 @@ namespace QLBanDoAnNhanh.Controllers
         }
         public IActionResult TrangChu()
         {
+
             var products = _context.SanPhams.ToList(); // L?y danh sách s?n ph?m
             return View(products); // Truy?n danh sách s?n ph?m vào view
         }

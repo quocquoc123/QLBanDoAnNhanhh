@@ -18,4 +18,5 @@ public partial class ChiTietGioHang
     public virtual GioHang? MaGhNavigation { get; set; }
 
     public virtual SanPham? MaSpNavigation { get; set; }
+    public int MaKhuyenMai { get;  set; }
 }

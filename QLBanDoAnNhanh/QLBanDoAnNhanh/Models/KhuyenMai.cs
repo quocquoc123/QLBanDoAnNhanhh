@@ -22,4 +22,5 @@ public partial class KhuyenMai
     public int SoLuong { get; set; }
 
     public virtual ICollection<DonHang> DonHangs { get; set; } = new List<DonHang>();
+    
 }
