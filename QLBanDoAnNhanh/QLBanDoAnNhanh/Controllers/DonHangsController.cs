@@ -1,181 +1,167 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QLBanDoAnNhanh.Models;
 
-namespace QLBanDoAnNhanh.Controllers
+
+public class DonHangsController : Controller
 {
-    public class DonHangsController : Controller
+    private readonly QlbanDoAnNhanhContext _context; // Thay đổi theo DbContext của bạn
+
+    public DonHangsController(QlbanDoAnNhanhContext context)
     {
-        private readonly QlbanDoAnNhanhContext _context;
+        _context = context;
+    }
 
-        public DonHangsController(QlbanDoAnNhanhContext context)
+    // GET: DonHangs
+    public async Task<IActionResult> Index()
+    {
+        return View(await _context.DonHangs.ToListAsync());
+    }
+
+    // GET: DonHangs/Details/5
+    public async Task<IActionResult> Details(string id)
+    {
+        if (id == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        // GET: DonHangs
-        public async Task<IActionResult> Index()
+        var donHang = await _context.DonHangs
+            .FirstOrDefaultAsync(m => m.MaDh == id);
+        if (donHang == null)
         {
-            var qlbanDoAnNhanhContext = _context.DonHangs.Include(d => d.MaKhuyenMaiNavigation).Include(d => d.MaNguoiDungNavigation);
-            return View(await qlbanDoAnNhanhContext.ToListAsync());
-        }
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var donHang = await _context.DonHangs
-                .Include(d => d.MaKhuyenMaiNavigation)
-                .Include(d => d.MaNguoiDungNavigation)
-                .Include(d => d.ChiTietDonHangs)
-                    .ThenInclude(ct => ct.MaSpNavigation) // Nếu cần thông tin sản phẩm
-                .FirstOrDefaultAsync(m => m.MaDh == id);
-
-            if (donHang == null)
-            {
-                return NotFound();
-            }
-
-            return View(donHang);
+            return NotFound();
         }
 
-        // GET: DonHangs/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        return View(donHang);
+    }
+
+    // GET: DonHangs/Edit/5
+    public async Task<IActionResult> Edit(string id)
+    {
+        if (id == null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var donHang = await _context.DonHangs.FindAsync(id);
-            if (donHang == null)
-            {
-                return NotFound();
-            }
-
-            ViewData["MaKhuyenMai"] = new SelectList(_context.KhuyenMais, "MaKhuyenMai", "TenKhuyenMai", donHang.MaKhuyenMai);
-            return View(donHang);
+            return NotFound();
         }
 
-        // POST: DonHangs/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("MaDh,Username,Diachi,MaKhuyenMai,TongTien,SoLuong,TrangThai,CreatedAt,UpdatedAt")] DonHang donHang)
+        var donHang = await _context.DonHangs.FindAsync(id);
+        if (donHang == null)
         {
-            if (id != donHang.MaDh)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
+        return View(donHang);
+    }
 
-            if (ModelState.IsValid)
+    // POST: DonHangs/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(string id, [Bind("MaDh,TrangThai,OtherProperties")] DonHang donHang)
+    {
+        if (id != donHang.MaDh)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
             {
-                try
+                _context.Update(donHang);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DonHangExists(donHang.MaDh))
                 {
-                    donHang.UpdatedAt = DateTime.Now; // Cập nhật thời gian chỉnh sửa
-                    _context.Update(donHang);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!DonHangExists(donHang.MaDh))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
             }
-
-            ViewData["MaKhuyenMai"] = new SelectList(_context.KhuyenMais, "MaKhuyenMai", "TenKhuyenMai", donHang.MaKhuyenMai);
-            return View(donHang);
-        }
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var donHang = await _context.DonHangs
-                .Include(d => d.MaKhuyenMaiNavigation)
-                .Include(d => d.MaNguoiDungNavigation)
-                .FirstOrDefaultAsync(m => m.MaDh == id);
-            if (donHang == null)
-            {
-                return NotFound();
-            }
-
-            return View(donHang);
-        }
-        public async Task<IActionResult> UpdateTrangThai_ChuaGiao(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var donHang = await _context.DonHangs.FindAsync(id);
-            if (donHang == null)
-            {
-                return NotFound();
-            }
-
-            donHang.TrangThai = "Chưa Giao";
-            _context.Entry(donHang).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
         }
+        return View(donHang);
+    }
 
-        // Hàm cập nhật trạng thái "Đã Giao"
-        public async Task<IActionResult> UpdateTrangThai_DaGiao(string id)
+    // Cập nhật trạng thái đơn hàng
+    public async Task<IActionResult> UpdateTrangThai_ChuaGiao(string id)
+    {
+        return await UpdateTrangThai(id, "Chưa Giao");
+    }
+
+    public async Task<IActionResult> UpdateTrangThai_DaGiao(string id)
+    {
+        return await UpdateTrangThai(id, "Đã Giao");
+    }
+
+    public async Task<IActionResult> UpdateTrangThai_DangGiao(string id)
+    {
+        return await UpdateTrangThai(id, "Đang Giao");
+    }
+
+    public async Task<IActionResult> UpdateTrangThai_DaHuy(string id)
+    {
+        return await UpdateTrangThai(id, "Đã Hủy");
+    }
+
+    private async Task<IActionResult> UpdateTrangThai(string id, string trangThai)
+    {
+        if (id == null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var donHang = await _context.DonHangs.FindAsync(id);
-            if (donHang == null)
-            {
-                return NotFound();
-            }
-
-            donHang.TrangThai = "Đã Giao";
-            donHang.UpdatedAt = DateTime.Now; // Cập nhật thời gian giao
-            _context.Entry(donHang).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
-        }
-        // POST: DonHangs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var donHang = await _context.DonHangs.FindAsync(id);
-            if (donHang != null)
-            {
-                _context.DonHangs.Remove(donHang);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return NotFound();
         }
 
-        private bool DonHangExists(string id)
+        var donHang = await _context.DonHangs.FindAsync(id);
+        if (donHang == null)
         {
-            return _context.DonHangs.Any(e => e.MaDh == id);
+            return NotFound();
         }
+
+        donHang.TrangThai = trangThai; // Cập nhật trạng thái
+        donHang.UpdatedAt = DateTime.Now; // Cập nhật thời gian chỉnh sửa
+        _context.Entry(donHang).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    // GET: DonHangs/Delete/5
+    public async Task<IActionResult> Delete(string id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var donHang = await _context.DonHangs
+            .FirstOrDefaultAsync(m => m.MaDh == id);
+        if (donHang == null)
+        {
+            return NotFound();
+        }
+
+        return View(donHang);
+    }
+
+    // POST: DonHangs/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(string id)
+    {
+        var donHang = await _context.DonHangs.FindAsync(id);
+        _context.DonHangs.Remove(donHang);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+
+    // Kiểm tra tồn tại đơn hàng
+    private bool DonHangExists(string id)
+    {
+        return _context.DonHangs.Any(e => e.MaDh == id);
     }
 }

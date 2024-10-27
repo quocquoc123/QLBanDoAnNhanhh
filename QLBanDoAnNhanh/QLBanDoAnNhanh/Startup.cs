@@ -1,11 +1,14 @@
-﻿namespace QLBanDoAnNhanh
+﻿using DinkToPdf.Contracts;
+using DinkToPdf;
+
+namespace QLBanDoAnNhanh
 {
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
             // Thêm dịch vụ session
             services.AddSession(options =>
             {

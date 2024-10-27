@@ -38,6 +38,6 @@ public partial class SanPham
     public virtual ICollection<HinhAnh> HinhAnhs { get; set; } = new List<HinhAnh>();
 
     public virtual DanhMuc MaDmNavigation { get; set; } = null!;
-
+  
     public virtual GiamGium MaGiamGiaNavigation { get; set; } = null!;
 }

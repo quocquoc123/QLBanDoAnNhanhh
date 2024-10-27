@@ -8,11 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using QLBanDoAnNhanh.Models;
 using System.IO; // Để sử dụng FileStream và Path
 using Microsoft.AspNetCore.Http; // Để sử dụng IFormFile
-    
+
 namespace QLBanDoAnNhanh.Controllers
 {
     public class SanPhamsController : Controller
     {
+
         private QlbanDoAnNhanhContext db = new QlbanDoAnNhanhContext();
 
         private readonly QlbanDoAnNhanhContext _context;
@@ -67,6 +68,29 @@ namespace QLBanDoAnNhanh.Controllers
 
             return View(sanPham);
         }
+
+        //[HttpPost]
+        //public IActionResult AddComment(int maSP, string noiDung)
+        //{
+        //    if (string.IsNullOrEmpty(noiDung))
+        //    {
+        //        return RedirectToAction("ChiTietSanPham", new { id = maSP });
+        //    }
+
+        //    var binhLuan = new BinhLuan
+        //    {
+        //        MaSp = maSP,
+        //        NoiDung = noiDung,
+        //        NgayBinhLuan = DateTime.Now,
+        //        NguoiDung = _context.NguoiDungs.FirstOrDefault(u => u.Username == User.Identity.Name) // Hoặc u.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)
+        //    };
+
+        //    _context.BinhLuans.Add(binhLuan);
+        //    _context.SaveChanges();
+
+        //    return RedirectToAction("ChiTietSanPham", new { id = maSP });
+        //}
+
 
         // GET: SanPhams/Create
         public IActionResult Create()
@@ -248,6 +272,13 @@ namespace QLBanDoAnNhanh.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var chiTietDonHangs = await _context.ChiTietDonHangs
+         .Where(c => c.MaSp == id)
+         .ToListAsync();
+
+            _context.ChiTietDonHangs.RemoveRange(chiTietDonHangs);
+
+            // Xóa sản phẩm
             var sanPham = await _context.SanPhams.FindAsync(id);
             if (sanPham != null)
             {
@@ -259,14 +290,42 @@ namespace QLBanDoAnNhanh.Controllers
         }
         public IActionResult TrangChu()
         {
+            var products = _context.SanPhams.ToList();
 
-            var products = _context.SanPhams.ToList(); // L?y danh sách s?n ph?m
-            return View(products); // Truy?n danh sách s?n ph?m vào view
+            // Lấy sản phẩm gợi ý dựa trên số lượng đã được mua
+            var suggestedProducts = GetMostPurchasedProducts(2); // Lấy 2 sản phẩm bán chạy nhất
+
+            ViewBag.SuggestedProducts = suggestedProducts;
+
+            return View(products); // Truyền danh sách sản phẩm vào view
         }
+        private List<SanPham> GetMostPurchasedProducts(int topN = 5)
+        {
+            using (var context = new QlbanDoAnNhanhContext())
+            {
+                // Lấy top N sản phẩm được mua nhiều nhất
+                var mostPurchasedProducts = context.ChiTietDonHangs
+                    .GroupBy(ct => ct.MaSp) // Nhóm theo mã sản phẩm
+                    .Select(g => new
+                    {
+                        MaSp = g.Key,
+                        TotalQuantity = g.Sum(ct => ct.SoLuong) // Tổng số lượng mua
+                    })
+                    .OrderByDescending(g => g.TotalQuantity) // Sắp xếp theo số lượng giảm dần
+                    .Take(topN) // Lấy N sản phẩm mua nhiều nhất
+                    .Join(context.SanPhams, // Join để lấy thông tin sản phẩm
+                        topProduct => topProduct.MaSp,
+                        sanPham => sanPham.MaSp,
+                        (topProduct, sanPham) => sanPham)
+                    .ToList();
 
+                return mostPurchasedProducts;
+            }
+        }
         private bool SanPhamExists(int id)
         {
             return _context.SanPhams.Any(e => e.MaSp == id);
+
         }
         public IActionResult SanPhamTheoTenDanhMuc(string TenHang)
         {
@@ -277,5 +336,16 @@ namespace QLBanDoAnNhanh.Controllers
             ViewBag.TenDanhMuc = TenHang; // Truyền tên danh mục cho View
             return View(sanPhams);
         }
+        public async Task<List<SanPham>> GetPopularProducts(int topN = 5)
+{
+    return await _context.ChiTietDonHangs
+        .GroupBy(ct => ct.MaSp)
+        .OrderByDescending(g => g.Sum(ct => ct.SoLuong)) // Sắp xếp theo tổng số lượng bán
+        .Take(topN) // Lấy top N sản phẩm
+        .Select(g => g.First().MaSpNavigation) // Lấy thông tin sản phẩm
+        .ToListAsync();
+}
+
     }
+
 }

@@ -30,6 +30,7 @@ namespace QLBanDoAnNhanh.Controllers
 
         public IActionResult DangXuat()
         {
+            TempData["SuccessMessage"] = "Đăng xuất thành công"; // Thêm thông báo thành công
             HttpContext.Session.Clear(); // Xóa tất cả session
             return RedirectToAction("TrangChu", "SanPhams");
         }
@@ -59,7 +60,7 @@ namespace QLBanDoAnNhanh.Controllers
                     HttpContext.Session.SetString("adminLogin", check.Username);
                     return RedirectToAction("Index", "NguoiDungs"); // Chuyển hướng đến trang quản trị
                 }
-
+                TempData["SuccessMessage"] = "Đăng Nhập Thành Công";
                 return RedirectToAction("TrangChu", "SanPhams"); // Người dùng thông thường
             }
 
