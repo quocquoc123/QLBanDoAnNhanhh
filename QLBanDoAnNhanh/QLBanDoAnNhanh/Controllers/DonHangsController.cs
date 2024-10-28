@@ -16,10 +16,21 @@ public class DonHangsController : Controller
     }
 
     // GET: DonHangs
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string trangThai = null)
     {
-        return View(await _context.DonHangs.ToListAsync());
+        var query = _context.DonHangs.AsQueryable();
+
+        // Lọc theo trạng thái nếu có
+        if (!string.IsNullOrEmpty(trangThai))
+        {
+            query = query.Where(d => d.TrangThai == trangThai);
+        }
+
+        var donHangs = await query.ToListAsync();
+        ViewBag.TrangThai = trangThai; // Truyền trạng thái hiện tại về view
+        return View(donHangs);
     }
+
 
     // GET: DonHangs/Details/5
     public async Task<IActionResult> Details(string id)
@@ -56,19 +67,39 @@ public class DonHangsController : Controller
     }
 
     // POST: DonHangs/Edit/5
+    // POST: DonHangs/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(string id, [Bind("MaDh,TrangThai,OtherProperties")] DonHang donHang)
+    public async Task<IActionResult> Edit(string id, [Bind("MaDh,Username,TrangThai,Diachi,MaKhuyenMai,TongTien,SoLuong,CreatedAt,UpdatedAt")] DonHang donHang)
     {
         if (id != donHang.MaDh)
         {
             return NotFound();
         }
 
+        // Kiểm tra nếu Username bị bỏ trống
+        if (string.IsNullOrEmpty(donHang.Username))
+        {
+            ModelState.AddModelError("Username", "Tên người dùng không được bỏ trống.");
+            return View(donHang);
+        }
+
+        // Kiểm tra MaKhuyenMai có hợp lệ hay không
+        var khuyenMai = await _context.KhuyenMais.FindAsync(donHang.MaKhuyenMai);
+        if (khuyenMai == null)
+        {
+            ModelState.AddModelError("MaKhuyenMai", "Mã khuyến mãi không hợp lệ.");
+            return View(donHang);
+        }
+
         if (ModelState.IsValid)
         {
             try
             {
+                // Không thay đổi MaKhuyenMai nếu không cần
+                _context.Entry(donHang).Property(d => d.MaKhuyenMai).IsModified = false;
+
+                // Cập nhật các thuộc tính khác
                 _context.Update(donHang);
                 await _context.SaveChangesAsync();
             }
@@ -87,6 +118,8 @@ public class DonHangsController : Controller
         }
         return View(donHang);
     }
+
+
 
     // Cập nhật trạng thái đơn hàng
     public async Task<IActionResult> UpdateTrangThai_ChuaGiao(string id)

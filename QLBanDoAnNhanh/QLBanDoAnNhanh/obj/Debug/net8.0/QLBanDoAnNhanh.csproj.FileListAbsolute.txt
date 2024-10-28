@@ -1565,3 +1565,20 @@ D:\New folder (3)\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\
 D:\New folder (3)\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\itext.svg.dll
 D:\New folder (3)\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\Pdf2Text.dll
 D:\New folder (3)\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\Common.Logging.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\Common.Logging.Core.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\DinkToPdf.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\itext.barcodes.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\itext.forms.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\itext.io.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\itext.kernel.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\itext.layout.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\itext.pdfa.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\itext.sign.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\itext.styledxmlparser.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\itext.svg.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\Pdf2Text.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\obj\Debug\net8.0\QLBanDoAnNhanh.MvcApplicationPartsAssemblyInfo.cs
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\X.PagedList.dll
+D:\QLBanDoAnNhanh\QLBanDoAnNhanh\QLBanDoAnNhanh\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll

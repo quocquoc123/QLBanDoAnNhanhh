@@ -153,7 +153,7 @@ namespace QLBanDoAnNhanh.Controllers
             // Điều hướng về trang giỏ hàng
             return RedirectToAction("Index");
         }
-        public IActionResult Checkout(string DiaChi)
+        public IActionResult Checkout(  string DiaChi)
         {
             // Kiểm tra xem người dùng đã đăng nhập hay chưa
             var username = HttpContext.Session.GetString("userLogin");
@@ -184,19 +184,19 @@ namespace QLBanDoAnNhanh.Controllers
                 }
 
                 string trangThai = GetOrderStatusFromDatabase(context, username);
-
                 // Tạo đối tượng DonHang
                 var donHang = new DonHang
                 {
                     MaDh = maDonHang,
                     Username = username,
-                    MaKhuyenMai = 2,
-                    Diachi = "Lê trọng tấn",
+                    MaKhuyenMai = 2, // Giả sử có mã khuyến mãi mặc định
+                    Diachi = DiaChi,
                     TongTien = gioHang.ChiTietGioHangs.Sum(x => (double)(x.TongTien ?? 0)),
                     SoLuong = (int)gioHang.ChiTietGioHangs.Sum(x => x.SoLuongSp),
                     TrangThai = trangThai,
                     CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now
+                    UpdatedAt = DateTime.Now,
+                   
                 };
 
                 // Thêm đơn hàng vào cơ sở dữ liệu
