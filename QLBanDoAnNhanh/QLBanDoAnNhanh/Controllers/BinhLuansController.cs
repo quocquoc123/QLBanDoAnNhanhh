@@ -9,11 +9,13 @@ using QLBanDoAnNhanh.Models;
 
 namespace QLBanDoAnNhanh.Controllers
 {
+
     public class BinhLuansController : Controller
     {
-        private readonly QlbanDoAnNhanhContext _context;
+        private QlbanDoAnNhanh3Context db = new QlbanDoAnNhanh3Context();
+        private readonly QlbanDoAnNhanh3Context _context;
 
-        public BinhLuansController(QlbanDoAnNhanhContext context)
+        public BinhLuansController(QlbanDoAnNhanh3Context context)
         {
             _context = context;
         }
@@ -21,8 +23,8 @@ namespace QLBanDoAnNhanh.Controllers
         // GET: BinhLuans
         public async Task<IActionResult> Index()
         {
-            var qlbanDoAnNhanhContext = _context.BinhLuans.Include(b => b.MaNguoiDungNavigation).Include(b => b.MaSpNavigation);
-            return View(await qlbanDoAnNhanhContext.ToListAsync());
+            var QlbanDoAnNhanh3Context = _context.BinhLuans.Include(b => b.MaNguoiDungNavigation).Include(b => b.MaSpNavigation);
+            return View(await QlbanDoAnNhanh3Context.ToListAsync());
         }
 
         // GET: BinhLuans/Details/5
@@ -164,6 +166,24 @@ namespace QLBanDoAnNhanh.Controllers
         private bool BinhLuanExists(int id)
         {
             return _context.BinhLuans.Any(e => e.MaBinhLuan == id);
+        }
+        public ActionResult Search(string searchTerm)
+        {
+
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+
+                return RedirectToAction("Index");
+            }
+
+
+            var searchTermLower = searchTerm.ToLower();
+
+            var searchResults = db.BinhLuans
+                .Where(p => p.NoiDung.ToLower().Contains(searchTermLower))
+                .ToList();
+            ViewBag.SearchTerm = searchTerm;
+            return View("Index", searchResults);
         }
     }
 }

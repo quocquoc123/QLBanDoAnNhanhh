@@ -3,9 +3,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>Website bán đồ ăn</title>
     <link rel="stylesheet" href="~/Scripts/Css/TrangChuStyle.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.13/signalr.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -335,6 +336,7 @@
         
     </style>
 </head>
+@RenderSection("Scripts", required: false)
 <body>
 
     @if (TempData["SuccessMessage"] != null)
@@ -398,7 +400,7 @@
                     <li><a href="@Url.Action("SanPhamTheoTenDanhMuc", "SanPhams", new { TenHang = "BESTSELLER" }, null)">Best seller</a></li>
                     <li><a href="@Url.Action("SanPhamTheoTenDanhMuc", "SanPhams", new { TenHang = "KHUYENMAI" }, null)">Khuyến mãi</a></li>
                     <li><a href="@Url.Action("SanPhamTheoTenDanhMuc", "SanPhams", new { TenHang = "DOANCAY" }, null)">Đồ ăn cay</a></li>
-                 
+                    <li><a href="@Url.Action("Chat", "Chat")">Chat bot</a></li>
                 </ul>
             </nav>
             <div class="col-6 text-right">
@@ -471,7 +473,11 @@
 
             <div class="row mt-3">
                 <div class="col-md-6">
-                    <p>&copy; 2023 Fast Food. All Rights Reserved.</p>
+                    <a asp-controller="SanPhams" asp-action="StoreLocation">
+                        <img src="~/images/map.jpg" alt="Xem vị trí cửa hàng" style="width: 100px; height: 100px;" />
+                    </a>
+
+
                 </div>
                 <div class="col-md-6 text-right">
                     

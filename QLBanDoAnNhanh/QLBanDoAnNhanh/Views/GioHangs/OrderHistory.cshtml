@@ -86,7 +86,14 @@ else
                     <td>
                         @if (donHang.TrangThai != "Đã hủy") 
                         {
-                            <a href="@Url.Action("CancelOrder", "GioHangs", new { maDh = donHang.MaDh })" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');">Hủy Đơn</a>
+                            @if (donHang.TrangThai == "Đã Giao")
+                            {
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("CancelOrder", "GioHangs", new { maDh = donHang.MaDh })" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');">Hủy Đơn</a>
+
+                            }
                         }
                         else
                         {
@@ -94,6 +101,7 @@ else
                         }
                     </td>
                 </tr>
+                
             }
         </tbody>
     </table>

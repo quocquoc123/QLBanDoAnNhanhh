@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QLBanDoAnNhanh.Models;
 
@@ -40,4 +41,20 @@ public partial class SanPham
     public virtual DanhMuc MaDmNavigation { get; set; }
 
     public virtual GiamGium MaGiamGiaNavigation { get; set; }
+    [NotMapped]
+    public double? GiaSauGiam
+    {
+        get
+        {
+            if (MaGiamGiaNavigation != null &&
+                MaGiamGiaNavigation.ThoiGianBatDau <= DateTime.Now &&
+                MaGiamGiaNavigation.ThoiGianKetThuc >= DateTime.Now)
+            {
+                double discountAmount = GiaTien * MaGiamGiaNavigation.GiaTri / 100;
+                return GiaTien - discountAmount;
+            }
+            return GiaTien;
+        }
+        set { }  // Setter trống để tránh lỗi ánh xạ
+    }
 }

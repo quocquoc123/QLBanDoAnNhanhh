@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using QLBanDoAnNhanh.Models;
-using DinkToPdf;
-using DinkToPdf.Contracts;
+﻿    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.EntityFrameworkCore;
+    using QLBanDoAnNhanh.Models;
+    using DinkToPdf;
+    using DinkToPdf.Contracts;
 
-namespace QLBanDoAnNhanh.Controllers
-{
+    namespace QLBanDoAnNhanh.Controllers
+    {
     public class GioHangsController : Controller
     {
+        private readonly QlbanDoAnNhanh3Context _context;
         private GioHang GetGioHangFromSession()
         {
             var gioHang = HttpContext.Session.GetObjectFromJson<GioHang>("GioHang");
@@ -27,7 +28,7 @@ namespace QLBanDoAnNhanh.Controllers
         private void UpdateCartItemCount(GioHang gioHang)
         {
             ViewBag.CartItemCount = gioHang.ChiTietGioHangs.Sum(ct => ct.SoLuongSp);
-        
+
         }
 
         // Lưu giỏ hàng vào session
@@ -46,7 +47,7 @@ namespace QLBanDoAnNhanh.Controllers
             var gioHang = GetGioHangFromSession(); // Lấy giỏ hàng hiện tại từ session
 
             // Tìm sản phẩm theo mã sản phẩm
-            using (var context = new QlbanDoAnNhanhContext())
+            using (var context = new QlbanDoAnNhanh3Context())
             {
                 var sanPham = context.SanPhams.FirstOrDefault(sp => sp.MaSp == MaSp);
                 if (sanPham == null)
@@ -62,20 +63,13 @@ namespace QLBanDoAnNhanh.Controllers
                 if (totalQuantityAfterAdding > sanPham.SlbanTrongNgay)
                 {
                     TempData["ErrorMessage"] = "Không đủ số lượng sản phẩm trong kho!"; // Thông báo lỗi
-                    return RedirectToAction("TrangChu","SanPhams"); // Quay lại giỏ hàng và hiển thị thông báo lỗi
+                    return RedirectToAction("TrangChu", "SanPhams"); // Quay lại giỏ hàng và hiển thị thông báo lỗi
                 }
 
                 // Nếu sản phẩm chưa có trong giỏ, thêm sản phẩm mới vào giỏ
                 if (chiTietGioHang == null)
                 {
-                    chiTietGioHang = new ChiTietGioHang
-                    {
-                        MaSp = MaSp,
-                        MaSpNavigation = sanPham,
-                        SoLuongSp = quantity,
-                        MaKhuyenMai = 1,
-                        TongTien = (int)(quantity * sanPham.GiaTien)
-                    };
+                    chiTietGioHang = NewMethod(MaSp, quantity, sanPham);
                     gioHang.ChiTietGioHangs.Add(chiTietGioHang);
                 }
                 else
@@ -92,6 +86,18 @@ namespace QLBanDoAnNhanh.Controllers
 
             // Điều hướng về trang giỏ hàng
             return RedirectToAction("Index");
+        }
+
+        private static ChiTietGioHang NewMethod(int MaSp, int quantity, SanPham sanPham)
+        {
+            return new ChiTietGioHang
+            {
+                MaSp = MaSp,
+                MaSpNavigation = sanPham,
+                SoLuongSp = quantity,
+           
+                TongTien = (int)(quantity * sanPham.GiaTien)
+            };
         }
 
         // Hiển thị giỏ hàng
@@ -153,7 +159,7 @@ namespace QLBanDoAnNhanh.Controllers
             // Điều hướng về trang giỏ hàng
             return RedirectToAction("Index");
         }
-        public IActionResult Checkout(  string DiaChi)
+        public IActionResult Checkout(string DiaChi)
         {
             // Kiểm tra xem người dùng đã đăng nhập hay chưa
             var username = HttpContext.Session.GetString("userLogin");
@@ -172,7 +178,7 @@ namespace QLBanDoAnNhanh.Controllers
             }
 
             string maDonHang = Guid.NewGuid().ToString();
-            using (var context = new QlbanDoAnNhanhContext())
+            using (var context = new QlbanDoAnNhanh3Context())
             {
                 foreach (var item in gioHang.ChiTietGioHangs)
                 {
@@ -189,14 +195,14 @@ namespace QLBanDoAnNhanh.Controllers
                 {
                     MaDh = maDonHang,
                     Username = username,
-                    MaKhuyenMai = 2, // Giả sử có mã khuyến mãi mặc định
+                    MaKhuyenMai = "1", // Giả sử có mã khuyến mãi mặc định
                     Diachi = DiaChi,
                     TongTien = gioHang.ChiTietGioHangs.Sum(x => (double)(x.TongTien ?? 0)),
                     SoLuong = (int)gioHang.ChiTietGioHangs.Sum(x => x.SoLuongSp),
                     TrangThai = trangThai,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
-                   
+                    MaNguoiDung = int.Parse(HttpContext.Session.GetString("UserID"))
                 };
 
                 // Thêm đơn hàng vào cơ sở dữ liệu
@@ -234,9 +240,8 @@ namespace QLBanDoAnNhanh.Controllers
 
             return RedirectToAction("TrangChu", "SanPhams");
         }
-
         // Phương thức lấy trạng thái đơn hàng từ database
-        private string GetOrderStatusFromDatabase(QlbanDoAnNhanhContext context, string username)
+        private string GetOrderStatusFromDatabase(QlbanDoAnNhanh3Context context, string username)
         {
             // Kiểm tra xem người dùng đã có đơn hàng trước đó chưa
             var hasPreviousOrders = context.DonHangs.Any(d => d.Username == username);
@@ -256,7 +261,7 @@ namespace QLBanDoAnNhanh.Controllers
                 return RedirectToAction("Login", "User"); // Điều hướng đến trang đăng nhập
             }
 
-            using (var context = new QlbanDoAnNhanhContext())
+            using (var context = new QlbanDoAnNhanh3Context())
             {
                 // Lấy danh sách đơn hàng của người dùng
                 var donHangs = context.DonHangs
@@ -271,7 +276,7 @@ namespace QLBanDoAnNhanh.Controllers
         }
         public IActionResult OrderDetails(string maDh)
         {
-            using (var context = new QlbanDoAnNhanhContext())
+            using (var context = new QlbanDoAnNhanh3Context())
             {
                 var donHang = context.DonHangs
                                     .Include(dh => dh.ChiTietDonHangs)
@@ -290,11 +295,11 @@ namespace QLBanDoAnNhanh.Controllers
         // Hủy đơn hàng
         public IActionResult CancelOrder(string maDh)
         {
-            using (var context = new QlbanDoAnNhanhContext())
+            using (var context = new QlbanDoAnNhanh3Context())
             {
                 // Tìm đơn hàng theo mã đơn hàng
                 var donHang = context.DonHangs.FirstOrDefault(dh => dh.MaDh == maDh);
-
+                
                 if (donHang == null)
                 {
                     TempData["Message"] = "Không tìm thấy đơn hàng để hủy!";
@@ -320,5 +325,7 @@ namespace QLBanDoAnNhanh.Controllers
                 return RedirectToAction("OrderHistory"); // Quay lại lịch sử đơn hàng
             }
         }
+
+       
     }
 }

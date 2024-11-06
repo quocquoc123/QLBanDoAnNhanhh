@@ -11,7 +11,7 @@ public partial class DonHang
 
     public string Diachi { get; set; }
 
-    public int MaKhuyenMai { get; set; }
+    public string MaKhuyenMai { get; set; }
 
     public double TongTien { get; set; }
 
